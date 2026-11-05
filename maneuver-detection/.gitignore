@@ -1,0 +1,7 @@
+*.json
+*.parquet
+*./data
+*.pdf
+*.zip
+*.pyc
+*.pkl

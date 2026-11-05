@@ -1,0 +1,40 @@
+[project]
+name = "maneuver-detection"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "fastparquet>=2024.11.0",
+  "matplotlib>=3.10.7",
+  "pandas>=2.3.3",
+  "pyarrow>=21.0.0",
+  "pydantic>=2.12.2",
+  "pyyaml>=6.0.3",
+  "scikit-learn>=1.7.2",
+  "scipy>=1.16.2",
+  "tqdm>=4.67.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.3,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pylint>=4.0.1",
+    "pylint-pydantic>=0.4.0",
+    "pyqt6>=6.9.1",
+    "pytest>=8.4.2",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "D", "I"]
+ignore = ["E203", "E501", "D105", "D202", "D203", "D213"]
+#
+[tool.ruff.lint.pydocstyle]
+convention = "google"
