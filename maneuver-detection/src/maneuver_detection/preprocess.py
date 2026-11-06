@@ -128,8 +128,7 @@ class Preprocessor:
 
             # TODO: Add more or change features
 
-            # block_concat = pd.concat([block_mean, block_std, block_mode], axis="columns")
-            block_concat = pd.concat([block_mean], axis="columns")
+            block_concat = pd.concat([block_mean, block_std, block_mode], axis="columns")
 
             modes = block["Maneuver_Label"].mode()
             block_concat["Maneuver_Label"] = modes.iloc[0] if not modes.empty else None
