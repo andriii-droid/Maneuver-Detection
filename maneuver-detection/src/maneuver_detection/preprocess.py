@@ -120,11 +120,11 @@ class Preprocessor:
             block_mean = block.select_dtypes(include="number").mean().to_frame().T
             block_mean = block_mean.rename(columns=lambda x: f"{x}_Mean")
 
-            # block_std = block.select_dtypes(include="number").std().to_frame().T
-            # block_std = block_std.rename(columns=lambda x: f"{x}_Std")
+            block_std = block.select_dtypes(include="number").std().to_frame().T
+            block_std = block_std.rename(columns=lambda x: f"{x}_Std")
 
-            # block_mode = block.select_dtypes(include=["boolean", "bool"]).mode()
-            # block_mode = block_mode.rename(columns=lambda x: f"{x}_Mode")
+            block_mode = block.select_dtypes(include=["boolean", "bool"]).mode()
+            block_mode = block_mode.rename(columns=lambda x: f"{x}_Mode")
 
             # TODO: Add more or change features
 
