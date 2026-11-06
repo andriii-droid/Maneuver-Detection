@@ -2,6 +2,7 @@
 
 import pandas as pd
 from tqdm import tqdm
+import numpy as np
 
 from maneuver_detection.config import Config
 
@@ -73,7 +74,12 @@ class Preprocessor:
 
     def _fix_missing_values(self, df: pd.DataFrame) -> pd.DataFrame:
         '''Fills missing Values with the value of t-1'''
-        return df.ffill().bfill()
+        df = df.ffill().bfill()
+
+        num_cols = df.select_dtypes(include="number").columns
+        df[num_cols] = df[num_cols].fillna(0)
+
+        return df
 
     def _assign_maneuver_labels(self, df: pd.DataFrame, annotations: pd.DataFrame) -> pd.DataFrame:
         ann_df = pd.DataFrame(annotations.tolist())
@@ -109,8 +115,9 @@ class Preprocessor:
         stride_size = pd.Timedelta(seconds=self._config.preprocess.stride_size)
 
         while time <= (end_time - block_size):
-            block = df.iloc[(df.index >= time) & (df.index < time + block_size), :]
 
+            block = df.loc[(df.index >= time) & (df.index < time + block_size)]
+            
             block_mean = block.select_dtypes(include="number").mean().to_frame().T
             block_mean = block_mean.rename(columns=lambda x: f"{x}_Mean")
 
@@ -125,13 +132,16 @@ class Preprocessor:
             # block_concat = pd.concat([block_mean, block_std, block_mode], axis="columns")
             block_concat = pd.concat([block_mean], axis="columns")
 
-            block_concat["Maneuver_Label"] = block["Maneuver_Label"].mode()
+            modes = block["Maneuver_Label"].mode()
+            block_concat["Maneuver_Label"] = modes.iloc[0] if not modes.empty else None
 
             df_features = pd.concat([df_features, block_concat], ignore_index=True)
 
             time += stride_size
 
-        df_features = df_features.dropna(ignore_index=True)
+
+
+        #df_features = df_features.dropna(ignore_index=True)
         
         if df_features.isna().any().any():
             print("Found NaN in DataFrame!")
