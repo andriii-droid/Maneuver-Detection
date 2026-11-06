@@ -84,12 +84,13 @@ class Preprocessor:
     def _assign_maneuver_labels(self, df: pd.DataFrame, annotations: pd.DataFrame) -> pd.DataFrame:
         ann_df = pd.DataFrame(annotations.tolist())
 
+        labels = {str(k).lower(): v for k, v in self._config.label2id.items()}
+
         ann_df["startTimestamp"] = pd.to_datetime(ann_df["startTimestamp"])
         ann_df["endTimeStamp"] = pd.to_datetime(ann_df["endTimeStamp"])
-        ann_df["comment"] = ann_df["comment"].str.lower()
+        ann_df["comment"] = ann_df["comment"].str.lower().map(labels)
         ann_df = ann_df.sort_values("startTimestamp")
-
-        
+ 
         df["TimeStamp"] = pd.to_datetime(df["TimeStamp"]).astype("datetime64[us]")
         df = df.sort_values("TimeStamp")
 
@@ -101,7 +102,7 @@ class Preprocessor:
             direction="backward",
         )
 
-        merged["Maneuver_Label"] = merged["comment"].fillna("no maneuver")
+        merged["Maneuver_Label"] = merged["comment"].fillna(0)
 
         merged = merged.drop(columns=["startTimestamp", "endTimeStamp", "comment"])
         return merged
