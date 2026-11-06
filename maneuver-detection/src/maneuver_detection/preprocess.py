@@ -32,7 +32,10 @@ class Preprocessor:
             df.columns = df.columns.str.strip()
 
             df_preprocessed = pd.concat([df_preprocessed, df], ignore_index=True)
-        
+
+        bool_cols = df_preprocessed.select_dtypes(include=["boolean", "bool"]).columns
+        df_preprocessed[bool_cols] = df_preprocessed[bool_cols].astype("float64")
+            
         return df_preprocessed.fillna(0)
 
     def preprocess_file(self, data_id: str) -> pd.DataFrame:
@@ -185,5 +188,5 @@ if __name__ == "__main__":
     print(f"Preprocessing training data and writing results to {_config.train_data_path}")
     preprocessor.create_train_set()
 
-    # print(f"Preprocessing test data and writing results to {_config.test_data_path}")
-    # preprocessor.create_test_set()
+    print(f"Preprocessing test data and writing results to {_config.test_data_path}")
+    preprocessor.create_test_set()
