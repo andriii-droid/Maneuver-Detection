@@ -6,18 +6,18 @@ state_description_path: data/StateDescriptions.json # default is 'StateDescripti
 # at data path
 train_data_ids:
   - a366ff0e-ac1e-4632-821f-594ee8750b90
-  # - 28bd3cd3-1d6a-403f-ab8a-83efaf260dd0
-  # - 92b2d28b-21e4-498c-b6dd-c27a47716a25
-  # - 21194a58-8a4d-4d0f-a4a9-e374393183b4
-  # - 0bbf0c4e-fb3c-4213-bff8-ef21ee5ebf79
-  # - b5a540db-434b-4c3d-86dd-4668d40586c2
-  # - 2a2467dd-9cb2-45de-a64f-f182395b3d1a
-  # - ef4852a4-fcfe-429b-b753-d11e2ad08cac
-  # - 39b2c145-c49f-470b-8280-d253fa98153f
-  # - 8ac99efe-b70b-4b4b-983b-6064fe37c67b
-  # - 9a2e5b24-1d93-47ef-bd90-0fae0d719df7
-  # - 1675a16e-a2a3-4038-9007-50b0b26a685c
-  # - 08412468-26ac-4777-9afb-4671f426277b
+  - 28bd3cd3-1d6a-403f-ab8a-83efaf260dd0
+  - 92b2d28b-21e4-498c-b6dd-c27a47716a25
+  - 21194a58-8a4d-4d0f-a4a9-e374393183b4
+  - 0bbf0c4e-fb3c-4213-bff8-ef21ee5ebf79
+  - b5a540db-434b-4c3d-86dd-4668d40586c2
+  - 2a2467dd-9cb2-45de-a64f-f182395b3d1a
+  - ef4852a4-fcfe-429b-b753-d11e2ad08cac
+  - 39b2c145-c49f-470b-8280-d253fa98153f
+  - 8ac99efe-b70b-4b4b-983b-6064fe37c67b
+  - 9a2e5b24-1d93-47ef-bd90-0fae0d719df7
+  - 1675a16e-a2a3-4038-9007-50b0b26a685c
+  - 08412468-26ac-4777-9afb-4671f426277b
 test_data_ids:
   - 0b3f3902-2c04-4625-8576-3bb963e3d709
   - 663f573a-74c5-4368-b60b-1fb433cd835d

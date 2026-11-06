@@ -29,9 +29,11 @@ class Preprocessor:
 
         for data_id in tqdm(data_ids):
             df = self.preprocess_file(data_id)
+            df.columns = df.columns.str.strip()
+
             df_preprocessed = pd.concat([df_preprocessed, df], ignore_index=True)
         
-        return df_preprocessed
+        return df_preprocessed.fillna(0)
 
     def preprocess_file(self, data_id: str) -> pd.DataFrame:
         """Preprocess a single file identified by data_id."""
@@ -74,12 +76,8 @@ class Preprocessor:
 
     def _fix_missing_values(self, df: pd.DataFrame) -> pd.DataFrame:
         '''Fills missing Values with the value of t-1'''
-        df = df.ffill().bfill()
+        return df.ffill().bfill()
 
-        num_cols = df.select_dtypes(include="number").columns
-        df[num_cols] = df[num_cols].fillna(0)
-
-        return df
 
     def _assign_maneuver_labels(self, df: pd.DataFrame, annotations: pd.DataFrame) -> pd.DataFrame:
         ann_df = pd.DataFrame(annotations.tolist())
