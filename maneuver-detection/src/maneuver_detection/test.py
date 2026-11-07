@@ -2,6 +2,8 @@
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import maneuver_detection.evaluate as ev
+
 
 from maneuver_detection.config import get_default_config
 from maneuver_detection.helpers import extract_features_and_labels, load_classifiers
@@ -17,5 +19,6 @@ for classifier in classifiers:
     print(f"Testing {classifier_name} ...")
 
     # TODO: Evaluate your classifier here
+    metrics = ev.evaluate(classifier_name, y_test, classifier.predict(x_test), get_default_config())
 
 plt.show()

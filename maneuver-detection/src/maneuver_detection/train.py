@@ -28,7 +28,6 @@ for classifier in classifiers:
     print(f"Evaluating {classifier_name} ...")
     # TODO: Evaluate your classifier here
     metrics = ev.evaluate(classifier_name, y_train, classifier.predict(x_train), get_default_config())
-    print(metrics.maneuver_recall)
 
 save_classifiers(classifiers, config.classifiers_path)
 plt.show()
